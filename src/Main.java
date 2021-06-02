@@ -128,8 +128,10 @@ public class Main {
                             String updatedHasSuspect = scan.nextLine();
                             updatedRecord.hasSuspect = updatedHasSuspect;
                             if (updatedHasSuspect.equalsIgnoreCase("n") || updatedHasSuspect.equalsIgnoreCase("no")) {
-                                String updatedSuspectName = "n";
+                                String updatedSuspectName = "unknown";
                                 String updatedWarrant = "unknown";
+                                updatedRecord.nameOfSuspect = updatedSuspectName;
+                                updatedRecord.hasWarrant = updatedWarrant;
                                 System.out.println("Description: ");
                                 String updatedDescription = scan.nextLine();
                                 updatedRecord.reportDescription = updatedDescription;
