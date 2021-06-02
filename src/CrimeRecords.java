@@ -1,7 +1,7 @@
 public class CrimeRecords {
     String reportTitle = "";
     String reportDate = "";
-    String numOfReport = "";
+    String numOfReport = "" ;
     String nameOfVictim = "";
     String hasSuspect = "";
     String nameOfSuspect = "";
