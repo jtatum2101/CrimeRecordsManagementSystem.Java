@@ -120,25 +120,36 @@ public class Main {
                         if (titleUpdated.equalsIgnoreCase(updatedRecord.reportTitle)) {
                             System.out.print("Date: ");
                             String dateUpdated = scan.nextLine();
+                            updatedRecord.reportDate = dateUpdated;
                             System.out.print("Victim's Name: ");
                             String victimNameUpdated = scan.nextLine();
+                            updatedRecord.nameOfVictim = victimNameUpdated;
                             System.out.println("Is there a suspect? ");
                             String updatedHasSuspect = scan.nextLine();
+                            updatedRecord.hasSuspect = updatedHasSuspect;
                             if (updatedHasSuspect.equalsIgnoreCase("n") || updatedHasSuspect.equalsIgnoreCase("no")) {
-                                String updatedSuspectName = null;
-                                String updatedWarrant = null;
+                                String updatedSuspectName = "n";
+                                String updatedWarrant = "unknown";
                                 System.out.println("Description: ");
                                 String updatedDescription = scan.nextLine();
+                                updatedRecord.reportDescription = updatedDescription;
+                                updatedRecord.updateRecord(dateUpdated, victimNameUpdated, updatedHasSuspect, updatedSuspectName, updatedWarrant, updatedDescription);
+                                madeUpdate = true;
+                                break;
+                            }else {
+                                System.out.println("Suspect's Name: ");
+                                String updatedSuspectName = scan.nextLine();
+                                updatedRecord.nameOfSuspect = updatedSuspectName;
+                                System.out.println("Does the suspect have the warrant? ");
+                                String updatedWarrant = scan.nextLine();
+                                updatedRecord.hasWarrant = updatedWarrant;
+                                System.out.println("Description: ");
+                                String updatedDescription = scan.nextLine();
+                                updatedRecord.reportDescription = updatedDescription;
+                                updatedRecord.updateRecord(dateUpdated, victimNameUpdated, updatedHasSuspect, updatedSuspectName, updatedWarrant, updatedDescription);
+                                madeUpdate = true;
+                                break;
                             }
-                            System.out.println("Suspect's Name: ");
-                            String updatedSuspectName = scan.nextLine();
-                            System.out.println("Does the suspect have the warrant? ");
-                            String updatedWarrant = scan.nextLine();
-                            System.out.println("Description: ");
-                            String updatedDescription = scan.nextLine();
-                            updatedRecord.updateRecord(dateUpdated, victimNameUpdated, updatedHasSuspect, updatedSuspectName, updatedWarrant, updatedDescription);
-                            madeUpdate = true;
-                            break;
                         }
                     }
                     if (!madeUpdate) {
