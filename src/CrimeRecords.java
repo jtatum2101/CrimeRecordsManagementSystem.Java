@@ -1,14 +1,14 @@
 public class CrimeRecords {
     String reportTitle = "";
     String reportDate = "";
-    String numOfReport = "" ;
+    int numOfReport = 0;
     String nameOfVictim = "";
     String hasSuspect = "";
     String nameOfSuspect = "";
     String hasWarrant = "";
     String reportDescription = "";
 
-    public CrimeRecords(String title, String date, String reportNumber, String victimName, String isSuspect, String suspectName, String warrant, String description) {
+    public CrimeRecords(String title, String date, int reportNumber, String victimName, String isSuspect, String suspectName, String warrant, String description) {
         reportTitle = title;
         reportDate = date;
         numOfReport = reportNumber;
@@ -18,21 +18,21 @@ public class CrimeRecords {
         hasWarrant = warrant;
         reportDescription = description;
     }
+
     public void updateRecord(String rDa, String nV, String hS, String nS, String hW, String rD) {
         reportDate = rDa;
         nameOfVictim = nV;
-        if(hS.equalsIgnoreCase("n")){
+        if (hS.equalsIgnoreCase("n")) {
             nameOfSuspect = null;
             hasWarrant = null;
             reportDescription = rD;
-        }else{
+        } else {
             nameOfSuspect = nS;
         }
-        if(hW.equalsIgnoreCase("n")){
+        if (hW.equalsIgnoreCase("n")) {
             hasWarrant = hW;
             reportDescription = rD;
         }
-
 
 
     }

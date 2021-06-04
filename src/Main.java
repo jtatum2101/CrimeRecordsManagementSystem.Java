@@ -5,7 +5,7 @@ public class Main {
     static ArrayList<CrimeRecords> records = new ArrayList<>();
     static String titleOfReport;
     static String dateOfReport;
-    static String numOfReport;
+    static int numOfReport;
     static String victimName;
     static String isSuspect;
     static String suspectName;
@@ -13,8 +13,9 @@ public class Main {
     static String descriptionOfReport;
 
     public static void main(String[] args) {
+        System.out.println("Welcome to Crime Records Management!");
         while (true) {
-            System.out.println("Welcome to Crime Records Management!");
+            scan.nextLine();
             System.out.println("[c]reate a new record, [v]iew all reports, view by [da]te, view by [r]eport [n]umber, [u]pdate, [d]elete, or [q]uit? ");
             System.out.print("> ");
             String option = scan.nextLine();
@@ -24,7 +25,8 @@ public class Main {
                 System.out.print("Date: ");
                 dateOfReport = scan.nextLine();
                 System.out.print("Report Number: ");
-                numOfReport = scan.nextLine();
+                numOfReport = scan.nextInt();
+                scan.nextLine();
                 System.out.print("Victim's name: ");
                 victimName = scan.nextLine();
                 while (true) {
@@ -33,32 +35,32 @@ public class Main {
                     if (isSuspect.equalsIgnoreCase("y") || isSuspect.equalsIgnoreCase("yes")) {
                         System.out.print("Suspect's Name: ");
                         suspectName = scan.nextLine();
-                        while (true) {
-                            System.out.println("Warrant? ");
-                            hasWarrant = scan.nextLine();
-                            if (hasWarrant.equalsIgnoreCase("y") || hasWarrant.equalsIgnoreCase("yes")) {
-                                System.out.println("Description: ");
-                                descriptionOfReport = scan.nextLine();
-                                break;
-                            } else if (hasWarrant.equalsIgnoreCase("n") || hasWarrant.equalsIgnoreCase("no")) {
-                                hasWarrant = null;
-                                System.out.println("Description: ");
-                                descriptionOfReport = scan.nextLine();
-                                break;
-                            } else {
-                                System.out.println("Please answer the question... ");
 
-                            }
+                        System.out.println("Warrant? ");
+                        hasWarrant = scan.nextLine();
+                        if (hasWarrant.equalsIgnoreCase("y") || hasWarrant.equalsIgnoreCase("yes")) {
+                            System.out.println("Description: ");
+                            descriptionOfReport = scan.nextLine();
+                            break;
+                        } else if (hasWarrant.equalsIgnoreCase("n") || hasWarrant.equalsIgnoreCase("no")) {
+                            hasWarrant = null;
+                            System.out.println("Description: ");
+                            descriptionOfReport = scan.nextLine();
+                            break;
+                        } else {
+                            System.out.println("Please answer the question... ");
+
                         }
+
                     } else if (isSuspect.equalsIgnoreCase("n") || isSuspect.equalsIgnoreCase("no")) {
-                        suspectName = null;
-                        hasWarrant = null;
+                        suspectName = "unknown";
+                        hasWarrant = "unknown";
                         System.out.println("Description");
                         descriptionOfReport = scan.nextLine();
                         break;
+                    } else {
+                        System.out.println("Please answer the question...");
                     }
-                    break;
-
                 }
                 CrimeRecords newRecord = new CrimeRecords(titleOfReport, dateOfReport, numOfReport, victimName, isSuspect, suspectName, hasWarrant, descriptionOfReport);
                 records.add(newRecord);
@@ -72,9 +74,9 @@ public class Main {
                     }
                 }
             } else if (option.equalsIgnoreCase("da")) {
-                if(records.size() == 0){
+                if (records.size() == 0) {
                     System.out.println("You have no records!");
-                }else {
+                } else {
                     boolean found = false;
                     System.out.println("Date: ");
                     String searchByDate = scan.nextLine();
@@ -91,14 +93,14 @@ public class Main {
                     }
                 }
             } else if (option.equalsIgnoreCase("rn")) {
-                if(records.size() == 0){
+                if (records.size() == 0) {
                     System.out.println("You have no records!");
-                }else {
+                } else {
                     boolean found = false;
                     System.out.print("Report Number: ");
-                    String searchedByNum = scan.nextLine();
+                    int searchedByNum = scan.nextInt();
                     for (CrimeRecords i : records) {
-                        if (searchedByNum.equals(i.numOfReport)) {
+                        if (searchedByNum == i.numOfReport) {
                             System.out.println(i.reportTitle + " - " + i.reportDate + " - " + i.numOfReport + " - " + i.nameOfVictim + " - " + i.hasSuspect + " - " + i.nameOfSuspect + " - " + i.hasWarrant + " - " + i.reportDescription);
                             found = true;
                             break;
@@ -110,9 +112,9 @@ public class Main {
                 }
             } else if (option.equalsIgnoreCase("u")) {
                 if (records.size() == 0) {
-                    System.out.println("You have no contacts!");
+                    System.out.println("You have no records!");
                 } else {
-                    System.out.println("Title: ");
+                    System.out.print("Title: ");
                     String titleUpdated = scan.nextLine();
                     boolean madeUpdate = false;
 
@@ -138,8 +140,8 @@ public class Main {
                                 updatedRecord.updateRecord(dateUpdated, victimNameUpdated, updatedHasSuspect, updatedSuspectName, updatedWarrant, updatedDescription);
                                 madeUpdate = true;
                                 break;
-                            }else {
-                                System.out.println("Suspect's Name: ");
+                            } else {
+                                System.out.print("Suspect's Name: ");
                                 String updatedSuspectName = scan.nextLine();
                                 updatedRecord.nameOfSuspect = updatedSuspectName;
                                 System.out.println("Does the suspect have the warrant? ");
@@ -159,9 +161,9 @@ public class Main {
                     }
                 }
             } else if (option.equalsIgnoreCase("d")) {
-                if(records.size() == 0){
+                if (records.size() == 0) {
                     System.out.println("You have no records! ");
-                }else {
+                } else {
                     System.out.print("Title: ");
                     String deletedTitle = scan.nextLine();
                     for (CrimeRecords i : records) {
@@ -171,10 +173,10 @@ public class Main {
                         }
                     }
                 }
-            }else if(option.equalsIgnoreCase("q")){
+            } else if (option.equalsIgnoreCase("q")) {
                 System.out.println("Thank you for filing a report! Have a good day!");
                 break;
-            }else{
+            } else {
                 System.out.println("Please select a valid option!");
             }
         }
